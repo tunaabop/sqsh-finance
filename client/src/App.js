@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+// add expense form component
+import AddExpense from "./components/AddExpense"; 
+import ExpenseList from "./components/ExpenseList";
 
 function App() {
   const [expenses, setExpenses] = useState([]);
@@ -10,39 +13,41 @@ function App() {
   }, []);
 
   return (
-    <main>
+    <main className="container">
       <h1>Squash ࿔*:･༄˖°.🍂</h1>
-      <p>A calm space for money clarity.</p>
-       <ul>
+      <p>Thoughtfaul budgeting, made simple.</p>
+      <AddExpense onAdd={expense => setExpenses([...expenses, expense])} />
+        <ExpenseList expenses={expenses} />
+       {/* <ul>
         {expenses.map(exp => (
           <li key={exp.id}>
             ${exp.amount} — {exp.category}
           </li>
         ))}
-      </ul>
+      </ul> */}
     </main>
   );
 }
 
-function AddExpense({ onAdd }) {
-  const [amount, setAmount] = useState("");
+// function AddExpense({ onAdd }) {
+//   const [amount, setAmount] = useState("");
 
-  const submit = async () => {
-    const res = await fetch("http://localhost:4000/expenses", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount, category: "Food" }),
-    });
+//   const submit = async () => {
+//     const res = await fetch("http://localhost:4000/expenses", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({ amount, category: "Food" }),
+//     });
 
-    const data = await res.json();
-    onAdd(data);
-  };
+//     const data = await res.json();
+//     onAdd(data);
+//   };
 
-  return (
-    <>
-      <input value={amount} onChange={e => setAmount(e.target.value)} />
-      <button onClick={submit}>Add</button>
-    </>
-  );
-}
+//   return (
+//     <>
+//       <input value={amount} onChange={e => setAmount(e.target.value)} />
+//       <button onClick={submit}>Add</button>
+//     </>
+//   );
+// }
 export default App;
