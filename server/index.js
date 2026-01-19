@@ -29,6 +29,31 @@ app.post("/expenses", async (req, res) => {
     res.json(result.rows[0]);
 });
 
+// Option to delete an expense row where id matches
+app.delete("/expenses/:id", async (req, res) => {
+    const { id } = req.params;
+    const result =
+    await pool.query("DELETE FROM expenses WHERE id = $1", [id]);
+    res.sendStatus(204);
+});
+
+//Option to edit/update an expense row where id matches
+app.put("/expenses/:id", async (req, res) => {
+    const { id } = req.params;
+    const {description, amount, category, date} = req.body;
+
+    try {
+        const result = await pool.query(
+            "UPDATE expenses SET description = $1, amount = $2, category = $3, date = $4 WHERE id = $5 RETURNING *",
+            [description, amount, category, date, id]
+        );
+        res.json(result.rows[0]);
+    }catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "Failed to update expense " });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 }); 

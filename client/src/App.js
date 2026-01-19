@@ -12,19 +12,33 @@ function App() {
       .then(data => setExpenses(data));
   }, []);
 
+  const deleteExpense = async (id) => {
+    const res =await fetch(`/expenses/${id}`, {
+        method: "DELETE",
+    });
+    console.log(res.status); // TODO
+    setExpenses(prev => prev.filter(exp => exp.id !== id));
+    // Optionally, you might want to refresh the expense list here or lift state up to handle it
+  };
+
+  const updateExpense = async (id, updatedFields) => {
+    const res = await fetch(`/expenses/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedFields),
+    });
+    const data = await res.json();
+    setExpenses(expenses.map(exp => exp.id === id ? data : exp));
+  };
+
   return (
     <main className="container">
       <h1>Squash ࿔*:･༄˖°.🍂</h1>
       <p>Thoughtfaul budgeting, made simple.</p>
       <AddExpense onAdd={expense => setExpenses([...expenses, expense])} />
-        <ExpenseList expenses={expenses} />
-       {/* <ul>
-        {expenses.map(exp => (
-          <li key={exp.id}>
-            ${exp.amount} — {exp.category}
-          </li>
-        ))}
-      </ul> */}
+        <ExpenseList expenses={expenses}
+         onDelete={deleteExpense} 
+         onUpdate={updateExpense}/>
     </main>
   );
 }
