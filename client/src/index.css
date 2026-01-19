@@ -1,13 +1,73 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --squash-orange: #c65d2e;
+  --pumpkin-gold: #e8a33a;
+  --forest-green: #3a5a40;
+  --cream: #f7f1e5;
+  --cocoa: #3b2f2f;
 }
 
-code {
+body {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  background: var(--cream);
+  color: var(--cocoa);
+}
+
+/* Layout + cards */
+.container {
+  max-width: 720px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+h1 {
+  color: var(--squash-orange);
+}
+
+.subtitle {
+  color: var(--forest-green);
+}
+
+/* Expense List styles */
+.expense-list {
+  list-style: none;
+  padding: 0;
+}
+
+.expense-item {
+  background: white;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.category {
+  margin-left: 0.5rem;
+  color: var(--forest-green);
+}
+
+.date {
+  color: #777;
+  font-size: 0.8rem;
+}
+
+.empty {
+  color: #777;
+  font-style: italic;
+}
+
+
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
+} */
