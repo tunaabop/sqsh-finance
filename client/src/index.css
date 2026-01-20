@@ -66,8 +66,23 @@ h1 {
   font-style: italic;
 }
 
+/* monthly snapshot styles */
+.monthly-snapshot {
+  background: #f6efe7; /* warm off-white */
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
 
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
+.snapshot-total {
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: #c96a2c; /* burnt orange */
+  margin: 0.5rem 0;
+}
+
+.snapshot-meta {
+  color: #6b5b4b;
+  font-size: 0.9rem;
+}

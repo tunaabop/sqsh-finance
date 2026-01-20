@@ -11,6 +11,23 @@ function App() {
       .then(data => setExpenses(data));
   }, []);
 
+  // calculate monthly snapshot data
+  const currentMonth = new Date().toLocaleString('default', { month: 'long', year: 'numeric' });
+
+  const monthlyExpenses = expenses.filter(exp => {
+    const expDate = new Date(exp.created_at);
+    const now = new Date();
+    return (expDate.getMonth() === now.getMonth() && expDate.getFullYear() === now.getFullYear());
+  });
+  
+  const monthlyTotal = monthlyExpenses.reduce((total, exp) => total + parseFloat(exp.amount), 0);
+
+
+
+
+
+
+
   const deleteExpense = async (id) => {
     const res =await fetch(`/expenses/${id}`, {
         method: "DELETE",
@@ -34,6 +51,17 @@ function App() {
     <main className="container">
       <h1>Squash ࿔*:･༄˖°.🍂</h1>
       <p>Thoughtfaul budgeting, made simple.</p>
+      <div className="monthly-snapshot">
+        <h2>🍁 {currentMonth} Snapshot</h2>
+        <p className="snapshot-total">
+          ${monthlyTotal.toFixed(2)}
+        </p>
+        <p className="snapshot-meta">
+          {monthlyExpenses.length} expense
+          {monthlyExpenses.length !== 1 && "s"} logged
+        </p>
+      </div>
+
       <AddExpense onAdd={expense => setExpenses([...expenses, expense])} />
         <ExpenseList expenses={expenses}
          onDelete={deleteExpense} 
