@@ -5,7 +5,6 @@ import ExpenseList from "./components/ExpenseList";
 
 function App() {
   const [expenses, setExpenses] = useState([]);
-
   useEffect(() => {
     fetch("/expenses")
       .then(res => res.json())

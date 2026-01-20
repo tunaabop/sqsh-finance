@@ -47,11 +47,21 @@ function ExpenseList({ expenses, onDelete, onUpdate }) {
                 value={editForm.amount}
                 onChange={handleChange}
               />
-              <input
+              
+              <select
                 name="category"
+                type="text"
                 value={editForm.category}
                 onChange={handleChange}
-              />
+                required
+            >
+                <option value="">Select category</option>
+                <option value="Food">Food</option>
+                <option value="Rent">Rent</option>
+                <option value="Fun">Fun</option>
+                <option value="Transport">Transport</option>
+                <option value="Other">Other</option>
+            </select>
               <input
                 name="date"
                 type="date"

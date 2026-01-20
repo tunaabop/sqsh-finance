@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 function AddExpense({ onAdd }) {
     const [form, setForm] = useState({
         amount: "",
@@ -40,14 +39,21 @@ function AddExpense({ onAdd }) {
                 placeholder="Amount"
             />
 
-            <input
+             <select
                 name="category"
                 type="text"
                 value={form.category}
                 onChange={handleChange}
-                placeholder="Category"
-            />
-
+                required
+            >
+                <option value="">Select category</option>
+                <option value="Food">Food</option>
+                <option value="Rent">Rent</option>
+                <option value="Fun">Fun</option>
+                <option value="Transport">Transport</option>
+                <option value="Other">Other</option>
+            </select>
+            
             <input
                 name="description"
                 type="text"
