@@ -86,3 +86,37 @@ h1 {
   color: #6b5b4b;
   font-size: 0.9rem;
 }
+
+/* hover reveal effects for rows in expense list (i.e. expense-row) */
+.expense-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.expense-row:hover {
+  background: #f2e6d8;
+}
+
+.expense-actions {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.expense-row:hover .expense-actions {
+  opacity: 1;
+}
+
+/* fade out effect for deleting an expense */
+.expense-row.deleting {
+  opacity: 0;
+  transform: translateX(-4px);
+  transition:
+    opacity 1.2s ease,
+    transform 0.8s ease;
+}
+
+

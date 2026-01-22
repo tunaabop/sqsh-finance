@@ -72,13 +72,18 @@ function ExpenseList({ expenses, onDelete, onUpdate }) {
               <button type="button" onClick={() => setEditingId(null)}>Cancel</button>
             </form>
           ) : (
-            <>
-              <span>{exp.description} — ${exp.amount}</span>
-              <span> {exp.category}</span>
-              <span> {exp.date}</span>
-              <button onClick={() => startEdit(exp)}>Edit</button>
-              <button onClick={() => onDelete(exp.id)}>🗑</button>
-            </>
+            // <li className="expense-row">
+            <li className={`expense-row ${exp._deleting ? "deleting" : ""}`}>
+                <span>{exp.description} — ${exp.amount}</span>
+                <span> {exp.category}</span>
+                <span> {exp.date}</span>
+
+                <div className="expense-actions">
+                    <button onClick={() => startEdit(exp)}>✏️ Adjust</button>
+                    <button onClick={() => onDelete(exp.id)}>🍂 Remove</button>
+                </div>
+            </li>
+
           )}
         </li>
       ))}

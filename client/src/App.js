@@ -29,12 +29,13 @@ function App() {
 
 
   const deleteExpense = async (id) => {
-    const res =await fetch(`/expenses/${id}`, {
-        method: "DELETE",
-    });
-    console.log(res.status); // TODO
-    setExpenses(prev => prev.filter(exp => exp.id !== id));
-    // Optionally, you might want to refresh the expense list here or lift state up to handle it
+    setExpenses(prev => prev.map(exp =>exp.id === id ? { ...exp, _deleting: true } : exp));
+
+    await fetch(`/expenses/${id}`, { method: "DELETE" });
+
+    // update state after a short delay to allow for UI transition
+    setTimeout(() => {setExpenses(prev => prev.filter(exp => exp.id !== id))}, 200);
+
   };
 
   const updateExpense = async (id, updatedFields) => {
