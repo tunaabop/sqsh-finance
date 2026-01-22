@@ -54,6 +54,20 @@ app.put("/expenses/:id", async (req, res) => {
     }
 });
 
+// add route to get total expenses for the current month
+app.get("/expenses/total", async (req, res) => {
+    try {
+        const result = await pool.query(
+            "SELECT COALESCE(SUM(amount), 0) AS total FROM expenses");
+            
+        res.json(result.rows[0]); // returns { total: <sum> }
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "Failed to fetch monthly total" });
+    }
+});
+
+// Start server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 }); 

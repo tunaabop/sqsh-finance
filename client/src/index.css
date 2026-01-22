@@ -4,6 +4,13 @@
   --forest-green: #3a5a40;
   --cream: #f7f1e5;
   --cocoa: #3b2f2f;
+
+
+  --fall-orange: #c86b3c;
+  --fall-gold: #e3b448;
+  --fall-brown: #5a3e2b;
+  --fall-green: #5b7a59;
+  --fall-cream: #f6efe8;
 }
 
 body {
@@ -92,13 +99,23 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem;
-  border-radius: 8px;
-  transition: background 0.3s ease;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  background: var(--fall-cream);
+  border-radius: 10px;
+  /* transition: background 0.3s ease; */
+  transition:
+    opacity 1.2s ease,
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.4s ease,
+    box-shadow 0.4s ease;
 }
 
 .expense-row:hover {
   background: #f2e6d8;
+  box-shadow: 0 6px 16px rgba(90, 62, 43, 0.15);
+  transform: translateY(-1px);
+
 }
 
 .expense-actions {
@@ -110,13 +127,39 @@ h1 {
   opacity: 1;
 }
 
+/* adding expense effect */
+.expense-row.enter {
+  opacity: 0;
+  transform: translateY(-8px) scale(0.97);
+}
+.expense-row {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
 /* fade out effect for deleting an expense */
 .expense-row.deleting {
   opacity: 0;
-  transform: translateX(-4px);
-  transition:
+  transform: translateY(6px) scale(0.98);
+  /* add a subtle blur during fade */
+  filter: blur(1px);
+  /* transition:
     opacity 1.2s ease,
-    transform 0.8s ease;
+    transform 0.8s ease; */
 }
 
 
+/* monthly snapshot styles */
+
+/* for totals/stats cards, fade-in effect */
+.monthly-card {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: autumnRise 0.9s ease forwards;
+}
+
+@keyframes autumnRise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

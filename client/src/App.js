@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 // add expense form component
 import AddExpense from "./components/AddExpense"; 
 import ExpenseList from "./components/ExpenseList";
+import MonthlySnapshot from "./components/MonthlySnapshot";
 
 function App() {
   const [expenses, setExpenses] = useState([]);
@@ -19,13 +20,6 @@ function App() {
     const now = new Date();
     return (expDate.getMonth() === now.getMonth() && expDate.getFullYear() === now.getFullYear());
   });
-  
-  const monthlyTotal = monthlyExpenses.reduce((total, exp) => total + parseFloat(exp.amount), 0);
-
-
-
-
-
 
 
   const deleteExpense = async (id) => {
@@ -54,9 +48,7 @@ function App() {
       <p>Thoughtfaul budgeting, made simple.</p>
       <div className="monthly-snapshot">
         <h2>🍁 {currentMonth} Snapshot</h2>
-        <p className="snapshot-total">
-          ${monthlyTotal.toFixed(2)}
-        </p>
+        <MonthlySnapshot/>
         <p className="snapshot-meta">
           {monthlyExpenses.length} expense
           {monthlyExpenses.length !== 1 && "s"} logged
