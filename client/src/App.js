@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import AddExpense from "./components/AddExpense"; 
 import ExpenseList from "./components/ExpenseList";
 import MonthlySnapshot from "./components/MonthlySnapshot";
+import BudgetCompanion from "./components/BudgetCompanion";
 
 function App() {
   const [expenses, setExpenses] = useState([]);
@@ -21,6 +22,11 @@ function App() {
     return (expDate.getMonth() === now.getMonth() && expDate.getFullYear() === now.getFullYear());
   });
 
+  // calcularte average spend per day
+  const daysSofar = new Date().getDate();
+  const monthlyTotal = monthlyExpenses.reduce((sum, exp) => sum + Number(exp.amount), 0);
+  const avgPerDay = monthlyExpenses.length > 0  ? monthlyTotal / daysSofar : 0;
+  
 
   const deleteExpense = async (id) => {
     setExpenses(prev => prev.map(exp =>exp.id === id ? { ...exp, _deleting: true } : exp));
@@ -46,6 +52,9 @@ function App() {
     <main className="container">
       <h1>Squash ࿔*:･༄˖°.🍂</h1>
       <p>Thoughtfaul budgeting, made simple.</p>
+
+      <BudgetCompanion avgPerDay={avgPerDay} />
+
       <div className="monthly-snapshot">
         <h2>🍁 {currentMonth} Snapshot</h2>
         <MonthlySnapshot/>
