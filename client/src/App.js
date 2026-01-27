@@ -6,7 +6,12 @@ import MonthlySnapshot from "./components/MonthlySnapshot";
 import BudgetCompanion from "./components/BudgetCompanion";
 
 function App() {
+  // make expenses = single source of truth, other values (total, avg, companion visuals) derive from this
   const [expenses, setExpenses] = useState([]);
+  useEffect(() => {
+  console.log("APP expenses:", expenses);
+}, [expenses]);
+  // fetch expenses on initial load
   useEffect(() => {
     fetch("/expenses")
       .then(res => res.json())
@@ -14,12 +19,16 @@ function App() {
   }, []);
 
   // calculate monthly snapshot data
-  const currentMonth = new Date().toLocaleString('default', { month: 'long', year: 'numeric' });
+  const now = new Date();
+  const currentMonth = now.getMonth();
+  const currentYear = now.getFullYear();
 
   const monthlyExpenses = expenses.filter(exp => {
-    const expDate = new Date(exp.created_at);
-    const now = new Date();
-    return (expDate.getMonth() === now.getMonth() && expDate.getFullYear() === now.getFullYear());
+    const date = new Date(exp.date);
+    return (
+      date.getMonth() === currentMonth &&
+      date.getFullYear() === currentYear
+    );
   });
 
   // calcularte average spend per day
@@ -53,46 +62,19 @@ function App() {
       <h1>Squash ࿔*:･༄˖°.🍂</h1>
       <p>Thoughtfaul budgeting, made simple.</p>
 
+      {/* passing total and count to re-render MonthlySnapshot whenever expense added/deleted/updated */}
+      <MonthlySnapshot total={monthlyTotal} count={monthlyExpenses.length} />
 
-      <div className="monthly-snapshot">
-        <h2>🍁 {currentMonth} Snapshot</h2>
-        <MonthlySnapshot/>
-        <p className="snapshot-meta">
-          {monthlyExpenses.length} expense
-          {monthlyExpenses.length !== 1 && "s"} logged
-        </p>
-      </div>
+      {/* passing setExpenses to AddExpense so we can update expenses upon new expense creation */}
+      <AddExpense setExpenses={setExpenses} />
+      <ExpenseList expenses={expenses} setExpenses={setExpenses} 
+        onDelete={deleteExpense} 
+        onUpdate={updateExpense}/>
 
-      <AddExpense onAdd={expense => setExpenses([...expenses, expense])} />
-        <ExpenseList expenses={expenses}
-         onDelete={deleteExpense} 
-         onUpdate={updateExpense}/>
-         
-      <BudgetCompanion avgPerDay={avgPerDay} />
+      <BudgetCompanion avgPerDay={avgPerDay} expenses={expenses} />
 
     </main>
   );
 }
 
-// function AddExpense({ onAdd }) {
-//   const [amount, setAmount] = useState("");
-
-//   const submit = async () => {
-//     const res = await fetch("http://localhost:4000/expenses", {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify({ amount, category: "Food" }),
-//     });
-
-//     const data = await res.json();
-//     onAdd(data);
-//   };
-
-//   return (
-//     <>
-//       <input value={amount} onChange={e => setAmount(e.target.value)} />
-//       <button onClick={submit}>Add</button>
-//     </>
-//   );
-// }
 export default App;

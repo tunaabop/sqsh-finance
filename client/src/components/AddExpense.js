@@ -1,5 +1,5 @@
 import { useState } from "react";
-function AddExpense({ onAdd }) {
+function AddExpense({  setExpenses }) {
     const [form, setForm] = useState({
         amount: "",
         category: "",
@@ -16,15 +16,18 @@ function AddExpense({ onAdd }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await fetch("/expenses", {
+
+        fetch("http://localhost:4000/expenses", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(form),
+            body: JSON.stringify(form)
+        })
+        .then(res => res.json())
+        .then(createdExpense => {
+            console.log("CREATED EXPENSE FROM SERVER:", createdExpense);
+            setExpenses(prev => [...prev, createdExpense]);
         });
 
-        const data = await res.json();
-        onAdd(data);
-        setForm({ amount: "", category: "", description: "", date: "" });
     };
 
     return (

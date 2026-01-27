@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react"; 
+// import { useEffect, useState } from "react"; 
 
 
 // calcularte average spend per day
-const daysSofar = new Date().getDate();
+// const daysSofar = new Date().getDate();
 
-function BudgetCompanion() {
+function BudgetCompanion({avgPerDay}) {
     // fetch total expenses for the month
-    useEffect(() => {
-        fetch("http://localhost:4000/expenses/total")
-        .then(res => res.json())
-        .then(data => setTotal(Number(data.total)))
-        .catch(err => console.error("Error fetching monthly total:", err));
-    }, []);
-    const [total, setTotal] = useState(0);
+    // useEffect(() => {
+    //     fetch("http://localhost:4000/expenses/total")
+    //     .then(res => res.json())
+    //     .then(data => setTotal(Number(data.total)))
+    //     .catch(err => console.error("Error fetching monthly total:", err));
+    // }, []);
+    // const [total, setTotal] = useState(0);
     
-    // calculate average per day using total
-    const avgPerDay = total > 0 ? total / daysSofar : 0;
+    // // calculate average per day using total
+    // const avgPerDay = total > 0 ? total / daysSofar : 0;
     
     // determine opacity for budget companion based on avgPerDay
     let opacity = 1;
