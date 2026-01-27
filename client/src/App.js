@@ -53,7 +53,6 @@ function App() {
       <h1>Squash ࿔*:･༄˖°.🍂</h1>
       <p>Thoughtfaul budgeting, made simple.</p>
 
-      <BudgetCompanion avgPerDay={avgPerDay} />
 
       <div className="monthly-snapshot">
         <h2>🍁 {currentMonth} Snapshot</h2>
@@ -68,6 +67,9 @@ function App() {
         <ExpenseList expenses={expenses}
          onDelete={deleteExpense} 
          onUpdate={updateExpense}/>
+         
+      <BudgetCompanion avgPerDay={avgPerDay} />
+
     </main>
   );
 }
