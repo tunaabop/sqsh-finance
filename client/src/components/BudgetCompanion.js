@@ -32,11 +32,8 @@ function BudgetCompanion() {
     // render budget companion component
     return (
         <div className="budget-companion" >
-            <p className="budget-companion-title">🍂 GOAL: Paddington Dream Bag</p>
-            {/* {avgPerDay < 20 && <p>You're doing great! Keep it up! 🌟</p>}
-            {avgPerDay >= 20 && avgPerDay < 30 && <p>Watch your spending a bit. 🍁</p>}
-            {avgPerDay >= 30 && avgPerDay < 40 && <p>Consider tightening your budget. 🍂</p>}
-            {avgPerDay >= 40 && <p>Alert! You're overspending! 🍃</p>} */}
+            <p className="budget-companion-title">🍂 My Budget Companion: Paddington Dream Bag</p>
+           
             <img 
                 src="budget-companion.png"
                 alt="Budget Companion"
@@ -47,6 +44,10 @@ function BudgetCompanion() {
             <p className="budget-companion-message">
                 Avg ${avgPerDay.toFixed(2)} / day
             </p>
+             {avgPerDay < 20 && <p>You're doing great! Keep it up! 🌟</p>}
+            {avgPerDay >= 20 && avgPerDay < 30 && <p>Watch your spending a bit. 🍁</p>}
+            {avgPerDay >= 30 && avgPerDay < 40 && <p>Consider tightening your budget. 🍂</p>}
+            {avgPerDay >= 40 && <p>Alert! You're overspending! 🍃</p>}
         </div>
     );
 }
