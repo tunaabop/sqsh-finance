@@ -34,7 +34,7 @@ function App() {
 
   // calculate weekly snapshot data - recalculates on each render
   const weeklyTotals = WEEK_RANGES.map(() => 0); // initialize array with zeros
-  
+
   // sum expenses into their respective week ranges: weeklyTotals = [totalWeek1, totalWeek2, ...];
   monthlyExpenses.forEach(exp => {
     const day = new Date(exp.date).getDate();
@@ -77,7 +77,7 @@ function App() {
       <p>Thoughtfaul budgeting, made simple.</p>
 
       {/* passing total and count to re-render MonthlySnapshot whenever expense added/deleted/updated */}
-      <MonthlySnapshot total={monthlyTotal} count={monthlyExpenses.length} />
+      <MonthlySnapshot total={monthlyTotal} count={monthlyExpenses.length} weeklyTotals={weeklyTotals} />
 
       {/* passing setExpenses to AddExpense so we can update expenses upon new expense creation */}
       <AddExpense setExpenses={setExpenses} />

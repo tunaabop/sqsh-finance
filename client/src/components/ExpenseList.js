@@ -30,64 +30,77 @@ function ExpenseList({ expenses, onDelete, onUpdate }) {
   };
 
   return (
-    <ul>
-      {expenses.map(exp => (
-        <li key={exp.id}>
-          {editingId === exp.id ? (
-            <form onSubmit={submitEdit}>
-              <input
-                name="description"
-                value={editForm.description}
-                onChange={handleChange}
-              />
-              <input
-                name="amount"
-                type="number"
-                step="0.01"
-                value={editForm.amount}
-                onChange={handleChange}
-              />
-              
-              <select
-                name="category"
-                type="text"
-                value={editForm.category}
-                onChange={handleChange}
-                required
+   <ul>
+  {expenses.map(exp => (
+    <li
+      key={exp.id}
+      className={`expense-row ${exp._deleting ? "deleting" : ""}`}
+    >
+      {editingId === exp.id ? (
+        <form onSubmit={submitEdit} className="edit-form">
+          <input
+            name="description"
+            value={editForm.description}
+            onChange={handleChange}
+          />
+
+          <input
+            name="amount"
+            type="number"
+            step="0.01"
+            value={editForm.amount}
+            onChange={handleChange}
+          />
+
+          <select
+            name="category"
+            value={editForm.category}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select category</option>
+            <option value="Food">Food</option>
+            <option value="Rent">Rent</option>
+            <option value="Fun">Fun</option>
+            <option value="Transport">Transport</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <input
+            name="date"
+            type="date"
+            value={editForm.date}
+            onChange={handleChange}
+          />
+
+          <div className="expense-actions">
+            <button type="submit">Save</button>
+            <button
+              type="button"
+              onClick={() => setEditingId(null)}
             >
-                <option value="">Select category</option>
-                <option value="Food">Food</option>
-                <option value="Rent">Rent</option>
-                <option value="Fun">Fun</option>
-                <option value="Transport">Transport</option>
-                <option value="Other">Other</option>
-            </select>
-              <input
-                name="date"
-                type="date"
-                value={editForm.date}
-                onChange={handleChange}
-              />
-              <button type="submit">Save</button>
-              <button type="button" onClick={() => setEditingId(null)}>Cancel</button>
-            </form>
-          ) : (
-            // <li className="expense-row">
-            <li className={`expense-row ${exp._deleting ? "deleting" : ""}`}>
-                <span>{exp.description} — ${exp.amount}</span>
-                <span> {exp.category}</span>
-                <span> {exp.date}</span>
+              Cancel
+            </button>
+          </div>
+        </form>
+      ) : (
+        <>
+          <span>
+            {exp.description} — ${exp.amount}
+          </span>
+          <span>{exp.category}</span>
+          <span>{exp.date}</span>
 
-                <div className="expense-actions">
-                    <button onClick={() => startEdit(exp)}>✏️ Adjust</button>
-                    <button onClick={() => onDelete(exp.id)}>🍂 Remove</button>
-                </div>
-            </li>
+          <div className="expense-actions">
+            <button onClick={() => startEdit(exp)}>✏️ Adjust</button>
+            <button onClick={() => onDelete(exp.id)}>🍂 Remove</button>
+          </div>
+        </>
+      )}
+    </li>
+  ))}
+</ul>
 
-          )}
-        </li>
-      ))}
-    </ul>
   );
 }
 

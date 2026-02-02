@@ -1,6 +1,6 @@
 // import { useEffect, useState } from "react";   
 
-export default function MonthlySnapshot({total, count}) {
+export default function MonthlySnapshot({total, count, weeklyTotals}) {
 
     // const [total, setTotal] = useState(0);
 
@@ -21,7 +21,23 @@ export default function MonthlySnapshot({total, count}) {
                 {count} expense
                 {count !== 1 && "s"} logged
             </p>
+
+            <div className="weekly-breakdown">
+                <h3>Weekly spending</h3>
+                <div className="weeks">
+            {weeklyTotals.map((amount, i) => (
+                <div key={i} className="week-column">
+                <span className="week-label">W{i + 1}</span>
+                <span className="week-amount">
+                    ${amount.toFixed(0)}
+                </span>
+                </div>
+            ))}
             </div>
+            </div>
+        </div>
+
+        
         
     );
 }
