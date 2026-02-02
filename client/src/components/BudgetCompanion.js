@@ -19,13 +19,13 @@ function BudgetCompanion({avgPerDay}) {
     
     // determine opacity for budget companion based on avgPerDay
     let opacity = 1;
-    if (avgPerDay >= 40) {
+    if (avgPerDay >= 90) {
         opacity = 0.2;
     }
-    else if (avgPerDay >= 30) {
+    else if (avgPerDay >= 80) {
         opacity = 0.4;
     }
-    else if (avgPerDay >= 20) {
+    else if (avgPerDay >= 77) {
         opacity = 0.7;
     }
 
@@ -44,10 +44,10 @@ function BudgetCompanion({avgPerDay}) {
             <p className="budget-companion-message">
                 Avg ${avgPerDay.toFixed(2)} / day
             </p>
-             {avgPerDay < 20 && <p>You're doing great! Keep it up! 🌟</p>}
-            {avgPerDay >= 20 && avgPerDay < 30 && <p>Watch your spending a bit. 🍁</p>}
-            {avgPerDay >= 30 && avgPerDay < 40 && <p>Consider tightening your budget. 🍂</p>}
-            {avgPerDay >= 40 && <p>Alert! You're overspending! 🍃</p>}
+             {avgPerDay < 77 && <p>You're doing great! Keep it up! 🌟</p>}
+            {avgPerDay >= 77 && avgPerDay < 80 && <p>Watch your spending a bit. 🍁</p>}
+            {avgPerDay >= 80 && avgPerDay < 90 && <p>Consider tightening your budget. 🍂</p>}
+            {avgPerDay >= 90 && <p>Alert! You're overspending! 🍃</p>}
         </div>
     );
 }

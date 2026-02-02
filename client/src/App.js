@@ -4,6 +4,7 @@ import AddExpense from "./components/AddExpense";
 import ExpenseList from "./components/ExpenseList";
 import MonthlySnapshot from "./components/MonthlySnapshot";
 import BudgetCompanion from "./components/BudgetCompanion";
+import { WEEK_RANGES } from "./constants/weeks";
 
 function App() {
   // make expenses = single source of truth, other values (total, avg, companion visuals) derive from this
@@ -31,7 +32,20 @@ function App() {
     );
   });
 
-  // calcularte average spend per day
+  // calculate weekly snapshot data - recalculates on each render
+  const weeklyTotals = WEEK_RANGES.map(() => 0); // initialize array with zeros
+  
+  // sum expenses into their respective week ranges: weeklyTotals = [totalWeek1, totalWeek2, ...];
+  monthlyExpenses.forEach(exp => {
+    const day = new Date(exp.date).getDate();
+    WEEK_RANGES.forEach((range, index) => {
+      if (day >= range.start && day <= range.end) {
+        weeklyTotals[index] += Number(exp.amount);
+      }
+    });
+  }); 
+
+  // calculate average spend per day
   const daysSofar = new Date().getDate();
   const monthlyTotal = monthlyExpenses.reduce((sum, exp) => sum + Number(exp.amount), 0);
   const avgPerDay = monthlyExpenses.length > 0  ? monthlyTotal / daysSofar : 0;

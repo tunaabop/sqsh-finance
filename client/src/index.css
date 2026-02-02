@@ -189,7 +189,7 @@ h1 {
   color: #8a7a66;
 }
 
-/* highlight updated snapshot value on change*/
+/* highlight updated snapshot value on changer=*/
 .snapshot-value {
   transition: color 0.3s ease;
 }
