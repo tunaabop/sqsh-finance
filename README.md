@@ -8,7 +8,7 @@ spending feel approachable, intentional, and stress-free.
 
 ---
 
-## 🍂 What Squash Helps With
+## What Squash Helps With
 
 - Understanding where your money goes
 - Staying mindful about everyday spending
@@ -19,7 +19,7 @@ Squash is not about perfection — it’s about progress.
 
 ---
 
-## ✨ Features
+## Features
 
 - Add and track expenses
 - Categorize spending
@@ -36,7 +36,7 @@ Squash is not about perfection — it’s about progress.
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 ### Frontend
 - React (Create React App)
@@ -49,7 +49,7 @@ Squash is not about perfection — it’s about progress.
 - PostgreSQL
 - `pg` (node-postgres)
 
-### Tooling
+### Tools Used
 - VS Code
 - Git & GitHub
 - dotenv
@@ -57,7 +57,7 @@ Squash is not about perfection — it’s about progress.
 
 ---
 
-## 🗂 Project Structure
+## Project Structure
 
 ```
 
@@ -114,7 +114,7 @@ http://localhost:3000
 
 ---
 
-## 🌿 Why Squash?
+## Why Squash?
 
 The name **Squash** represents making the most of what we have — thoughtfully,
 intentionally, and at our own pace.
@@ -124,7 +124,7 @@ like a financial tool and more like a quiet space for reflection and clarity.
 
 ---
 
-## 🌱 Future Improvements
+## Future Improvements
 
 * Authentication
 * Data visualization (charts)
@@ -134,6 +134,6 @@ like a financial tool and more like a quiet space for reflection and clarity.
 
 ---
 
-## ✨ Author
+## Author
 
-Built by **tunaabop**
+Built with ♡ by **tunaabop**
